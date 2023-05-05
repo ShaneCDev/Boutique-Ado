@@ -113,3 +113,15 @@
         </div>
     </div>
 {% endblock %}
+
+<script type="text/javascript">
+    $('#sort-selector').change(function() {
+        var selector = $(this);
+        var currentUrl = new URL(window.location);
+
+        var selectedVal = selector.val();
+        if(selectedVal != "reset") {
+            var sor = selectedVal.split("_")[0]
+        }
+    })
+</script>
