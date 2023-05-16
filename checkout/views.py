@@ -57,7 +57,6 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
-            
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
@@ -107,10 +106,10 @@ def checkout_success(request, order_number):
     messages.success(request, f'Order successfully processed! \
                      Your order number is {order_number}. A confirmation \
                      email will be sent to {order.email}.')
-    
+
     if 'bag' in request.session:
         del request.session['bag']
-    
+
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
