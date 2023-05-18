@@ -5,7 +5,7 @@ from products.models import Product
 
 import json
 import time
-
+import stripe
 
 class StripeWH_Handler:
     """Handle Stripe Webhooks"""
@@ -49,7 +49,7 @@ class StripeWH_Handler:
                 order = Order.objects.get(
                     full_name__iexact=shipping_details.name,
                     email__iexact=billing_details.email,
-                    phone_number__iexact=shipping_details.address.phone,
+                    phone_number__iexact=shipping_details.phone,
                     country__iexact=shipping_details.address.country,
                     postcode__iexact=shipping_details.address.postal_code,
                     town_or_city__iexact=shipping_details.address.city,
@@ -57,7 +57,7 @@ class StripeWH_Handler:
                     street_address2__iexact=shipping_details.address.line2,
                     county__iexact=shipping_details.address.state,
                     grand_total=grand_total,
-                    orginal_bag=bag,
+                    original_bag=bag,
                     stripe_pid=pid,
                 )
                 order_exists=True
